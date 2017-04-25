@@ -1,0 +1,15 @@
+{
+    "bot": {
+        "token": "<token>"
+    },
+    "mongo": {
+        "MONGO_HOST": "localhost",
+        "MONGO_PORT": "27017",
+        "MONGO_USERNAME": "user",
+        "MONGO_PASSWORD": "user",
+        "MONGO_DBNAME": "tequ"
+    },
+    "api": {
+        "root": "http://localhost:5000/"
+    }
+}
