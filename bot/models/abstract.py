@@ -42,6 +42,9 @@ class AbstractCRUD(AbstractSerializable):
     def is_new(self):
         return not hasattr(self, '_id')
 
+    def is_synced(self):
+        return hasattr(self, '_etag')
+
     @property
     def id(self):
         return self.get('_id')
@@ -74,7 +77,7 @@ class AbstractCRUD(AbstractSerializable):
         )
 
     def update(self):
-        response = requests.post(self.url, dumps(self.serialize()), headers = {
+        response = requests.put(self.url, dumps(self.serialize()), headers = {
             'Content-Type': 'application/json',
             'If-Match': self.etag
         })

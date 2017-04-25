@@ -7,10 +7,12 @@ class SenderMixin():
     async def send_current_page(self):
         quest_state = self.user_state.get_quest_state()
 
-        if quest_state.get_current_page() is None:
+        current_page = quest_state.get_current_page()
+        if current_page is None:
             return await self.on_unknown()
 
-        current_page = quest_state.get_current_page().read()
+        if not current_page.is_synced():
+            current_page = current_page.read()
 
         current_page_message = quest_state.get_current_page_message()
         if current_page_message is not None:
