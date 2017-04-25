@@ -10,6 +10,8 @@
         "MONGO_DBNAME": "tequ"
     },
     "api": {
-        "root": "http://localhost:5000/"
+        "protocol": "http",
+        "host": "127.0.0.1",
+        "port": 5000
     }
 }
