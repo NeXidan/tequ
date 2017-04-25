@@ -6,7 +6,7 @@ class CommandsMixin(SenderMixin):
         await self.sender.sendMessage('Here will be my help\n/quests - display all quests\n/repeat - rpeat last page')
 
     async def on_command_start(self, *args):
-        self.on_command_help(*args)
+        await self.on_command_help(*args)
 
     async def on_command_quests(self, *args):
         if len(args):
