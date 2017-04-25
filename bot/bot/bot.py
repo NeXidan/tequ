@@ -35,7 +35,7 @@ class TequBot(UserHandler, CommandsMixin, QueriesMixin):
         await self.on_unknown();
 
     async def on_unknown(self):
-        await self.sender.sendMessage('I don\'t understand you, sorry')
+        await self.sender.sendMessage('I\'m sorry, i\'m afraid i can\'t do that')
 
     def on_close(self, ex):
         self.user_state.update()

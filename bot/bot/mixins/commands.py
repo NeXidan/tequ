@@ -3,7 +3,10 @@ from .sender import SenderMixin
 
 class CommandsMixin(SenderMixin):
     async def on_command_help(self, *args):
-        await self.sender.sendMessage('Here will be my help\n/quests - display all quests')
+        await self.sender.sendMessage('Here will be my help\n/quests - display all quests\n/repeat - rpeat last page')
+
+    async def on_command_start(self, *args):
+        self.on_command_help(*args)
 
     async def on_command_quests(self, *args):
         if len(args):
