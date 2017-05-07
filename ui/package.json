@@ -1,0 +1,37 @@
+{
+  "name": "tequ",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node build/server.js",
+    "test": "mocha --compilers js:babel-register",
+    "build": "NODE_ENV=production webpack --optimize"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-runtime": "^6.9.2",
+    "body-parser": "^1.15.2",
+    "bundle-loader": "^0.5.4",
+    "css-loader": "^0.23.1",
+    "di.js": "^1.9.0",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "got": "^6.7.1",
+    "malanka": "^0.1.0",
+    "malanka-loader": "malankajs/malanka-loader",
+    "postcss-loader": "^0.9.1",
+    "promise-loader": "^1.0.0",
+    "raw-loader": "^0.5.1",
+    "source-map-support": "^0.4.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.0"
+  },
+  "dependencies": {}
+}
