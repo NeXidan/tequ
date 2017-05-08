@@ -1,12 +1,11 @@
 import {Component} from 'malanka';
 
 export class DiComponent extends Component {
-    
     updateDependencies(deps) {
         if (!this.isRendered()) {
             return;
         }
-        
+
         let keys = Object.keys(deps);
 
         for (var index = 0; index < keys.length; index++) {
@@ -19,5 +18,4 @@ export class DiComponent extends Component {
             }
         }
     }
-    
 }

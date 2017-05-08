@@ -5,7 +5,7 @@
 }
 
 .link {
-    composes: font_normal from '../Base/Base.css';
+    composes: font_normal from '../../Base/Base.css';
 
     display: inline-block;
     text-decoration: none;

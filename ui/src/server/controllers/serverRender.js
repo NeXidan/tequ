@@ -1,6 +1,7 @@
 import {StringRenderer} from 'malanka/es5/Renderer/StringRenderer';
-import {GotRequest} from 'malanka/es5/Request/GotRequest';
+import {ServerRequest} from '../../lib/Request/ServerRequest';
 
+import {config} from '../di.server';
 import {diConfig} from '../../di.config';
 import {createContainer} from 'di.js/build/di.es5';
 
@@ -10,8 +11,8 @@ export function serverRender(req, res, next) {
     let di = createContainer(diConfig);
 
     di.put('renderer', new StringRenderer());
-    di.put('request', new GotRequest({
-        baseUrl: 'http://localhost:8000'
+    di.put('request', new ServerRequest({
+        baseUrl: config.api.root
     }));
 
     Promise.resolve(di({router: 'router', 'env': 'env'}, {di}))

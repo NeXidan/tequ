@@ -1,7 +1,7 @@
 import {staticResolver, then, createContainer, createMethodFactory, createInstanceFactory} from 'di.js/build/di.es5';
 
 import {DomRenderer} from 'malanka/es5/Renderer/DomRenderer';
-import {FetchRequest} from 'malanka/es5/Request/FetchRequest';
+import {ClientRequest} from './lib/Request/ClientRequest';
 
 import {diConfig} from './di.config';
 
@@ -21,8 +21,8 @@ diConfig.factories = [
     createInstanceFactory()
 ];
 
-diConfig.resolvers.push(staticResolver({FetchRequest}));
-diConfig.dependencies.request = 'FetchRequest';
+diConfig.resolvers.push(staticResolver({ClientRequest}));
+diConfig.dependencies.request = 'ClientRequest';
 
 let di = createContainer(diConfig);
 
@@ -34,4 +34,3 @@ then(di({'env': 'env', router: 'router'}, {di}), ({env, router}) => {
         isRestored = true;
     });
 });
-

@@ -2,7 +2,6 @@ import {Router as AbstractRouter} from 'malanka/es5/Router';
 import {then} from 'di.js/build/di.es5';
 
 export class Router extends AbstractRouter {
-
     /**
      * @param di
      * @returns {Router}
@@ -10,7 +9,8 @@ export class Router extends AbstractRouter {
     static factory({di}) {
         let router = new Router({
             routes: {
-                '/': 'home'
+                '/': 'home',
+                '/quests/:id(/)': 'quests'
             }
         });
 
@@ -19,7 +19,6 @@ export class Router extends AbstractRouter {
         router.use(
             event => {
                 session = di.session({event});
-
             },
             (event, err) => {
                 session = di.session({event});
@@ -51,5 +50,4 @@ export class Router extends AbstractRouter {
 
         return router;
     }
-
 }

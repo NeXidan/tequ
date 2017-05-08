@@ -34,8 +34,12 @@ module.exports = () => {
                     loader: extractTextWebpackPlugin.extract('css?modules&importLoaders=1&localIdentName=' + className)
                 },
                 {
-                    test: /\.(svg|png|ico)$/,
+                    test: /\.(svg|png)$/,
                     loader: 'file'
+                },
+                {
+                    test: /\.json$/,
+                    loader: 'json'
                 }
             ]
         },

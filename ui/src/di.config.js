@@ -29,6 +29,10 @@ export let diConfig = {
             content: 'errorPage'
         }],
 
+        quests: ['!BodyContainer', {
+            content: 'questPage'
+        }],
+
         // Pages
 
         BodyContainer: {
@@ -42,10 +46,18 @@ export let diConfig = {
         errorPage: ['ErrorPage', {
 
         }],
-        
+
+        questPage: ['QuestPage', {
+            quest: 'quest'
+        }],
+
         // Components
 
         // Data models & collections
+
+        quest: ['Quest', {
+            request: 'request'
+        }],
 
         // States
 
