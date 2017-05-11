@@ -1,7 +1,7 @@
 import {staticResolver, then, createContainer, createMethodFactory, createInstanceFactory} from 'di.js/build/di.es5';
 
-import {DomRenderer} from 'malanka/es5/Renderer/DomRenderer';
-import {ClientRequest} from './lib/Request/ClientRequest';
+import {ClientRenderer} from './libs/Renderer/ClientRenderer';
+import {ClientRequest} from './libs/Request/ClientRequest';
 
 import {diConfig} from './di.config';
 
@@ -26,7 +26,7 @@ diConfig.dependencies.request = 'ClientRequest';
 
 let di = createContainer(diConfig);
 
-di.put('renderer', new DomRenderer());
+di.put('renderer', new ClientRenderer());
 
 then(di({'env': 'env', router: 'router'}, {di}), ({env, router}) => {
     return router.start().then(event => {

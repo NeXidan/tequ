@@ -46,4 +46,12 @@ export class AbstractModel extends Model {
             this.channel('remove').emit(this);
         });
     }
+
+    isFetched() {
+        return Boolean(this[this.etagAttribute]);
+    }
+
+    static fetch(data, options) {
+        return this.factory(data).fetch(options);
+    }
 }

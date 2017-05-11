@@ -1,6 +1,6 @@
 var config = require('./default');
 
-var serverConfig = Object.assign({}, config(), {
+var serverConfig = Object.assign({}, config('server'), {
     watch: true,
     target: 'node',
 

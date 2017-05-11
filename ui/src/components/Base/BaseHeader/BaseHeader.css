@@ -1,0 +1,20 @@
+.root {
+    background: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .07), 0 1px 0 rgba(0, 0, 0, .07);
+    overflow: hidden;
+    z-index: 2;
+    height: 52px;
+    margin-top: -52px;
+}
+
+.header {
+    composes: font_mono from '../Base.css';
+
+    font-size: 20px;
+    font-weight: 400;
+    padding: 12px 12px 12px 24px;
+    margin: auto;
+    max-width: 760px;
+    float: left;
+}

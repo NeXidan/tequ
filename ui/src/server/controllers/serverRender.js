@@ -1,5 +1,5 @@
 import {StringRenderer} from 'malanka/es5/Renderer/StringRenderer';
-import {ServerRequest} from '../../lib/Request/ServerRequest';
+import {ServerRequest} from '../../libs/Request/ServerRequest';
 
 import {config} from '../di.server';
 import {diConfig} from '../../di.config';

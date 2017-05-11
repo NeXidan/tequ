@@ -1,0 +1,25 @@
+.root {
+    padding: 0 30px;
+    font-size: 0;
+    float: right;
+}
+
+.link {
+    composes: font_normal from '../Base.css';
+
+    display: inline-block;
+    text-decoration: none;
+    padding: 17px 22px;
+    color: #000;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255, 0, 0, 0);
+    transition: border-bottom-color .1s ease-out;
+}
+
+.link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.link_current {
+    border-bottom: 2px solid rgba(255, 0, 0, 0.7);
+}

@@ -1,0 +1,11 @@
+{{#each tree.links scope="link"}}
+    <line class="link" x1={{link.source.x}} y1={{link.source.y}} x2={{link.target.x}} y2={{link.target.y}}/>
+{{/each}}
+
+{{#each tree.nodes scope="node"}}
+    <QuestPagesTreeNode node=node/>
+
+    {{!-- <g class="node{{value.expanded ? " expanded"}}" transform="translate({{value.x}}, {{value.y}})">
+        <circle r="10"></circle>
+    </g> --}}
+{{/each}}

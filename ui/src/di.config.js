@@ -1,5 +1,5 @@
 import {webpackResolver, staticResolver} from 'di.js/build/di.es5';
-import {BodyContainer} from './components/BodyContainer/BodyContainer';
+import {BaseLayout} from './components/Base/BaseLayout/BaseLayout';
 import {Environment, Model, Collection} from 'malanka';
 
 export let diConfig = {
@@ -8,11 +8,11 @@ export let diConfig = {
             require.context('./models', true, /\.js$/),
             require.context('./collections', true, /\.js$/),
             require.context('./states', true, /\.js$/),
-            require.context('./lib', true, /\.js$/),
-            require.context('./components', true, /(Header|Page)\.js$/)
+            require.context('./libs', true, /\.js$/),
+            require.context('./components', true, /(Header|Content)\.js$/)
         ]),
         staticResolver({
-            BodyContainer,
+            BaseLayout,
             Environment,
             Collection,
             Model
@@ -21,41 +21,35 @@ export let diConfig = {
     dependencies: {
         // routes
 
-        home: ['!BodyContainer', {
-            content: 'homePage'
+        'route:home': ['!BaseLayout', {
+            content: 'HomeContent'
         }],
 
-        error: ['!BodyContainer', {
-            content: 'errorPage'
+        'route:error': ['!BaseLayout', {
+            content: 'ErrorContent'
         }],
 
-        quests: ['!BodyContainer', {
-            content: 'questPage'
+        'route:quest': ['!BaseLayout', {
+            content: ['QuestContent', {
+                model: 'quest'
+            }],
+            header: ['QuestHeader', {
+                model: 'quest'
+            }]
         }],
 
         // Pages
 
-        BodyContainer: {
+        BaseLayout: {
             env: 'env',
-            header: 'Header'
+            header: 'BaseHeader'
         },
-
-        homePage: ['HomePage', {
-        }],
-
-        errorPage: ['ErrorPage', {
-
-        }],
-
-        questPage: ['QuestPage', {
-            quest: 'quest'
-        }],
 
         // Components
 
         // Data models & collections
 
-        quest: ['Quest', {
+        quest: ['Quest.fetch', {
             request: 'request'
         }],
 

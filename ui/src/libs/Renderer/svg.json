@@ -1,0 +1,11 @@
+{
+    "namespaceURI": "http://www.w3.org/2000/svg",
+    "elements": [
+        "circle",
+        "g",
+        "rect",
+        "svg",
+        "text",
+        "line"
+    ]
+}

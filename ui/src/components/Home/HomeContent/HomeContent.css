@@ -1,0 +1,11 @@
+.root {
+    composes: root from "../../Base/Page.css";
+}
+
+.text {
+    composes: text from "../../Base/BaseSection/BaseSection.css";
+}
+
+.result {
+    padding: 20px 0;
+}

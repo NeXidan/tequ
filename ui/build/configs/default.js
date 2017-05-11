@@ -7,7 +7,7 @@ var DEBUG = process.env.NODE_ENV !== 'production';
 
 var className = DEBUG ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:4]&minimize';
 
-module.exports = () => {
+module.exports = (side = 'client') => {
     var extractTextWebpackPlugin = new ExtractTextWebpackPlugin('styles.css', {
         allChunks: true
     });
@@ -58,7 +58,11 @@ module.exports = () => {
                     new plugins.TemplateCSSModulesPlugin(),
                     new plugins.TemplateFlattenPlugin(),
                     new plugins.TemplateRequirePlugin()
-                ]
+                ],
+                define: {
+                    is_server: Boolean(side === 'server'),
+                    is_client: Boolean(side === 'client')
+                }
             }),
             extractTextWebpackPlugin
         ]
