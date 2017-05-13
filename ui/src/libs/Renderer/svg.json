@@ -6,6 +6,9 @@
         "rect",
         "svg",
         "text",
-        "line"
+        "line",
+        "marker",
+        "defs",
+        "path"
     ]
 }

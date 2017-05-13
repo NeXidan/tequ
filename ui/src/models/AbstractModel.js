@@ -26,6 +26,7 @@ export class AbstractModel extends Model {
     fetch({query, ...options} = {}) {
         return this._request({query}).then((data) => {
             this.setAttrs(data, options);
+            this.emitToChannel('fetch');
             return this;
         });
     }
@@ -36,6 +37,7 @@ export class AbstractModel extends Model {
 
         return this._request({method, data}).then((data) => {
             this.setAttrs(data, options);
+            this.emitToChannel('save');
             return this;
         });
     }
@@ -49,6 +51,10 @@ export class AbstractModel extends Model {
 
     isFetched() {
         return Boolean(this[this.etagAttribute]);
+    }
+
+    getId() {
+        return this[this.idAttribute];
     }
 
     static fetch(data, options) {

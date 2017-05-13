@@ -49,8 +49,11 @@ export let diConfig = {
 
         // Data models & collections
 
+        questPages: 'QuestPages',
+
         quest: ['Quest.fetch', {
-            request: 'request'
+            request: 'request',
+            pages: 'questPages'
         }],
 
         // States

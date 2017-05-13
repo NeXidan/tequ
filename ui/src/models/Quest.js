@@ -17,11 +17,17 @@ export class Quest extends AbstractModel {
         }
     }
 
+    getPages() {
+        return this._options.pages;
+    }
+
     getFirstPage() {
         let firstPage = this.get('first_page');
 
         if (firstPage && !(firstPage instanceof QuestPage)) {
-            firstPage = new QuestPage({_id: firstPage}, this._options);
+            let pages = this.getPages();
+            firstPage = pages.addUniqueById(firstPage, {...this._options, depth: 0});
+
             this.set('first_page', firstPage, {trigger: false});
         }
 

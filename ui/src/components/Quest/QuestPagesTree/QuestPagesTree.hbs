@@ -1,11 +1,8 @@
-{{#each tree.links scope="link"}}
-    <line class="link" x1={{link.source.x}} y1={{link.source.y}} x2={{link.target.x}} y2={{link.target.y}}/>
-{{/each}}
+<defs>
+    <marker id="arrow" viewBox="0 -3 10 6" refX="22" refY="-1" markerWidth="6" markerHeight="6" orient="auto" fill="#4682b4">
+        <path d="M0,-2L10,-1L10,0.5L0,4"></path>
+    </marker>
+</defs>
 
-{{#each tree.nodes scope="node"}}
-    <QuestPagesTreeNode node=node/>
-
-    {{!-- <g class="node{{value.expanded ? " expanded"}}" transform="translate({{value.x}}, {{value.y}})">
-        <circle r="10"></circle>
-    </g> --}}
-{{/each}}
+<g id="links-container"></g>
+<g id="nodes-container"></g>

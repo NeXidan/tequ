@@ -7,6 +7,6 @@ import {Action} from '../models/Action';
 })
 export class Actions extends Collection {
     getPages() {
-        return this.map((action) => action.getPage());
+        return this.map((action) => action.getTo());
     }
 }

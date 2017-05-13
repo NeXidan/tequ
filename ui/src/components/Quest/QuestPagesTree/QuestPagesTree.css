@@ -1,7 +1,19 @@
+.node {
+    cursor: pointer;
+}
 
+.node {
+    fill: #b0c4de;
+    stroke: #4682b4;
+    stroke-width: 1.5px;
+}
+
+.node.expanded {
+    fill: #fff;
+}
 
 .link {
     fill: none;
-    stroke: #ccc;
+    stroke: #4682b4;
     stroke-width: 1.5px;
 }
