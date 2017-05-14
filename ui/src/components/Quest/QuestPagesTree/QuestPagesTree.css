@@ -1,8 +1,5 @@
 .node {
     cursor: pointer;
-}
-
-.node {
     fill: #b0c4de;
     stroke: #4682b4;
     stroke-width: 1.5px;
@@ -13,6 +10,7 @@
 }
 
 .link {
+    cursor: pointer;
     fill: none;
     stroke: #4682b4;
     stroke-width: 1.5px;

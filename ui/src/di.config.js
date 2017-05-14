@@ -9,7 +9,7 @@ export let diConfig = {
             require.context('./collections', true, /\.js$/),
             require.context('./states', true, /\.js$/),
             require.context('./libs', true, /\.js$/),
-            require.context('./components', true, /(Header|Content)\.js$/)
+            require.context('./components', true, /(Header|Content|Sidebar)\.js$/)
         ]),
         staticResolver({
             BaseLayout,
@@ -31,7 +31,11 @@ export let diConfig = {
 
         'route:quest': ['!BaseLayout', {
             content: ['QuestContent', {
-                model: 'quest'
+                model: 'quest',
+                questState: 'questState'
+            }],
+            sidebar: ['QuestSidebar', {
+                questState: 'questState'
             }],
             header: ['QuestHeader', {
                 model: 'quest'
@@ -57,6 +61,10 @@ export let diConfig = {
         }],
 
         // States
+
+        questState: ['QuestState', {
+            quest: 'quest'
+        }],
 
         // Infrastructure
 

@@ -39,7 +39,8 @@ function linkArc(d) {
 })
 export class QuestPagesTree extends Component {
     onRender() {
-        this.initSimulation();
+        this._initSimulation();
+        this.onActiveNodeChange();
 
         if (!this._firstRendered) {
             let pages = this.model.getPages();
@@ -49,6 +50,12 @@ export class QuestPagesTree extends Component {
                 this.refreshSimulation([page, ...subPages]);
             });
 
+            let changePageQuestState = this.questState.channel('change:page');
+            this.listenTo(changePageQuestState, this.onActiveNodeChange.bind(this));
+
+            let changeActionQuestState = this.questState.channel('change:action');
+            this.listenTo(changeActionQuestState, this.onActiveNodeChange.bind(this));
+
             this._simulation.on('tick', this.simulationTick.bind(this));
         }
 
@@ -56,26 +63,55 @@ export class QuestPagesTree extends Component {
     }
 
     onClick({target} = {}) {
-        let tagName = target.tagName;
+        let classList = target.classList;
         let id = target.getAttribute('id');
 
-        if (tagName === 'circle') {
-            let pages = this.model.getPages();
-            let page = pages.get(id);
+        if (id) {
+            if (classList.contains(styles.node)) {
+                let pages = this.model.getPages();
+                let page = pages.get(id);
 
-            if (page && !page.isFetched()) {
-                return page.fetch();
+                if (page && !page.isFetched()) {
+                    return page.fetch();
+                } else {
+                    return this.questState.exchange({page: id});
+                }
+            }
+
+            if (classList.contains(styles.link)) {
+                return this.questState.exchange({action: id});
+            }
+        }
+
+        this.questState.exchange();
+    }
+
+    onActiveNodeChange() {
+        let renderer = this.getRenderer();
+
+        for (let className of [styles.node, styles.link]) {
+            let elements = this.element.getElementsByClassName(className);
+            for (let element of elements) {
+                renderer.setAttribute(element, 'filter', null);
+            }
+        }
+
+        let id = this.questState.getPage() || this.questState.getAction();
+        if (id) {
+            let nodeElement = this.element.getElementById(id);
+            if (nodeElement) {
+                renderer.setAttribute(nodeElement, 'filter', 'url(#glow)');
             }
         }
     }
 
     _setSize({minX, minY, width, height} = {}) {
-        this.element.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
-        this.element.setAttribute('width', width);
-        this.element.setAttribute('height', height);
+        this.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
+        this.setAttribute('width', width);
+        this.setAttribute('height', height);
     }
 
-    initSimulation() {
+    _initSimulation() {
         let pages = this.model.getPages();
         this.refreshSimulation(pages, {reset: true});
     }
@@ -126,18 +162,27 @@ export class QuestPagesTree extends Component {
         let nodes = this._simulation.nodes() || [];
         for (let node of nodes) {
             let nodeElement = this.element.getElementById(node.data.getId());
-            renderer.setAttribute(nodeElement, 'transform', `translate(${node.x}, ${node.y})`);
-            renderer.setAttribute(
-                nodeElement,
-                'class',
-                node.data.isFetched()? `${styles.node} ${styles.expanded}` : styles.node
-            );
+
+            if (nodeElement) {
+                renderer.setAttribute(nodeElement, 'transform', `translate(${node.x}, ${node.y})`);
+                renderer.setAttribute(
+                    nodeElement,
+                    'class',
+                    [
+                        styles.node,
+                        node.data.isFetched() ? styles.expanded : undefined,
+
+                    ].filter(Boolean).join(' ')
+                );
+            }
         }
 
         let links = this._simulation.force('link').links() || [];
         for (let link of links) {
             let linkElement = this.element.getElementById(link.data.getId());
-            renderer.setAttribute(linkElement, 'd', linkArc(link));
+            if (linkElement) {
+                renderer.setAttribute(linkElement, 'd', linkArc(link));
+            }
         }
 
         let nodesX = nodes.map((node) => node.x);

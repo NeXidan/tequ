@@ -6,6 +6,7 @@
     z-index: 2;
     height: 52px;
     margin-top: -52px;
+    margin-bottom: 1px;
 }
 
 .header {

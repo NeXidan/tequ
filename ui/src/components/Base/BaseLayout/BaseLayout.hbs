@@ -1,9 +1,14 @@
 {{header}}
-{{content}}
+<main class="layout">
+    <section class="column grow">{{content}}</section>
+
+    {{#if sidebar}}
+        <section class="column">{{sidebar}}</section>
+    {{/if}}
+</main>
 
 {{#if env.isServer}}
     <script type="text/javascript" src="/assets/bundle.js"></script>
 {{else}}
     <span></span>
 {{/if}}
-

@@ -2,6 +2,17 @@
     <marker id="arrow" viewBox="0 -3 10 6" refX="22" refY="-1" markerWidth="6" markerHeight="6" orient="auto" fill="#4682b4">
         <path d="M0,-2L10,-1L10,0.5L0,4"></path>
     </marker>
+
+    <filter id="glow" x="-100%" y="-100%" width="400%" height="400%">
+        <feFlood result="flood" flood-color="#00e591" flood-opacity="1"></feFlood>
+        <feComposite in="flood" result="mask" in2="SourceGraphic" operator="in"></feComposite>
+        <feMorphology in="mask" result="dilated" operator="dilate" radius="2"></feMorphology>
+        <feGaussianBlur in="dilated" result="blurred" stdDeviation="5"></feGaussianBlur>
+        <feMerge>
+            <feMergeNode in="blurred"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+    </filter>
 </defs>
 
 <g id="links-container"></g>

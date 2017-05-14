@@ -9,6 +9,15 @@
         "line",
         "marker",
         "defs",
-        "path"
+        "path",
+        "filter",
+        "feOffset",
+        "feGaussianBlur",
+        "feBlend",
+        "feMerge",
+        "feMergeNode",
+        "feFlood",
+        "feComposite",
+        "feMorphology"
     ]
 }
