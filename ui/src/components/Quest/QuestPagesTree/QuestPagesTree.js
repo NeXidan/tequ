@@ -1,5 +1,4 @@
 import {Component, Defaults, ValueProxy} from 'malanka';
-import {hierarchy, tree} from 'd3-hierarchy';
 import {forceSimulation, forceLink, forceCollide, forceX, forceY} from 'd3-force';
 
 import template from './QuestPagesTree.hbs';
