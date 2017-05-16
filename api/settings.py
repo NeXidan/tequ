@@ -10,6 +10,9 @@ MONGO_DBNAME = os.environ.get('MONGO_DBNAME', CONFIG['mongo']['MONGO_DBNAME'])
 RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PUT', 'PATCH', 'DELETE']
 
+X_DOMAINS = '*'
+X_HEADERS = ['Content-Type', 'If-Match', 'Accept']
+
 CACHE_CONTROL = 'max-age=20'
 CACHE_EXPIRES = 20
 
@@ -80,8 +83,7 @@ quest_pages = {
     'schema': {
         'text': {
             'type': 'string',
-            'maxlength': 1000,
-            'required': True
+            'maxlength': 1000
         },
         'image': {
             'type': 'string'
@@ -94,8 +96,7 @@ quest_pages = {
                     'text': {
                         'type': 'string',
                         'minlength': 1,
-                        'maxlength': 100,
-                        'required': True
+                        'maxlength': 100
                     },
                     'to': {
                         'type': 'objectid',
