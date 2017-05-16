@@ -33,7 +33,7 @@ class SenderMixin():
             reply_markup = {
                 'inline_keyboard': [
                     [{
-                        'text': action['text'],
+                        'text': action['text'] if 'text' in action else '',
                         'callback_data': 'action' + CALLBACK_QUERY_SEPARTOR + action['to']
                     }] for action in actions
                  ]
