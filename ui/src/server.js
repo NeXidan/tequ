@@ -10,8 +10,8 @@ import {serverRender} from './server/controllers/serverRender';
 
 export let app = new Router();
 
+app.use('/api/', apiController);
 app.use(bodyParser.json());
 app.use('/assets/', staticController);
-app.use('/api/', apiController);
 app.use(diController);
 app.use(serverRender);

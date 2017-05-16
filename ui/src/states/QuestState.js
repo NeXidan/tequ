@@ -1,14 +1,6 @@
 import {Model} from 'malanka';
 
 export class QuestState extends Model {
-    sync() {
-        let {router} = this.getEnv();
-        let page = this.getPage();
-        let action = this.getAction();
-
-        router.replace({page, action}, {trigger: false});
-    }
-
     getEnv() {
         return this._options.env;
     }
@@ -33,41 +25,20 @@ export class QuestState extends Model {
         this.set('action', action);
     }
 
-    get questPage() {
-        let page = this.getPage();
-
-        if (!page) {
-            return;
-        }
-
-        let quest = this.getQuest();
-        let pages = quest.getPages();
-
-        return pages.get(page);
+    extractQuestPage(...args) {
+        return this.getQuest().extractQuestPage(...args);
     }
 
-    get questAction() {
-        let action = this.getAction();
-
-        if (!action) {
-            return;
-        }
-
+    extractAction(action) {
         let id = action.split('-').unshift();
-        if (!id) {
-            return;
+        if (id) {
+            let quest = this.getQuest();
+            let page = quest.extractQuestPage(id);
+            if (page) {
+                let actions = page.getActions();
+                return actions.get(action);
+            }
         }
-
-        let quest = this.getQuest();
-        let pages = quest.getPages();
-
-        let page = pages.get(id);
-        if (!page) {
-            return;
-        }
-
-        let actions = page.getActions();
-        return actions.get(action);
     }
 
     exchange({page = null, action = null} = {}) {
@@ -78,8 +49,6 @@ export class QuestState extends Model {
         if (action !== this.getAction()) {
             this.setAction(action);
         }
-
-        this.sync();
     }
 
     updateDependencies({event: {query: {page, action} = {}} = {}} = {}) {

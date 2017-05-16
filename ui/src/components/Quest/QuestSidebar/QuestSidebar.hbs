@@ -1,11 +1,11 @@
 <div class="sidebar-wrapper{{@questState.page ?: " hidden"}}">
     {{#if @questState.page class="sidebar"}}
-        <QuestPageEdit model=questState.questPage/>
+        <QuestPageEdit questState=@questState/>
     {{/if}}
 </div>
 
-<div class="sidebar-wrapper{{@questState.action ?: " hidden"}}">
+{{!-- <div class="sidebar-wrapper{{@questState.action ?: " hidden"}}">
     {{#if @questState.action class="sidebar"}}
         action
     {{/if}}
-</div>
+</div> --}}

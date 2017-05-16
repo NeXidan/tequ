@@ -1,1 +1,10 @@
-page
+<tr class="row max">
+    {{#if model tagName="td"}}
+        <Textarea model=model name="text"/>
+    {{/if}}
+</tr>
+<tr class="row">
+    <td>
+        <Button model=model method="save">Save</Button>
+    </td>
+</tr>

@@ -9,11 +9,11 @@ import {Actions} from '../collections/Actions';
     url: '/quest_pages'
 })
 export class QuestPage extends AbstractModel {
-    parse({actions, ...data} = {}) {
+    parse({actions = [], ...data} = {}) {
         if (actions && !(actions instanceof Actions)) {
             actions = new Actions(
                 actions.map(
-                    (action) => new Action({from: this, ...action}, this._options)
+                    (action) => new Action({_from: this, ...action}, this._options)
                 ),
                 this._options
             );
@@ -23,7 +23,7 @@ export class QuestPage extends AbstractModel {
     }
 
     getActions() {
-        return this.get('actions');
+        return this.get('actions') || [];
     }
 
     getSubPages() {
@@ -33,6 +33,15 @@ export class QuestPage extends AbstractModel {
 
     getDepth() {
         return this._options.depth;
+    }
+
+    toJSON() {
+        let actions = this.getActions();
+
+        return {
+            ...super.toJSON(),
+            actions: actions.map((action) => action.serialize())
+        };
     }
 
     serialize() {

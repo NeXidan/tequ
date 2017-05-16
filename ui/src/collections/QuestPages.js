@@ -15,8 +15,12 @@ export class QuestPages extends Collection {
         let page = this.get(id);
 
         if (!page) {
-            let idAttribute = QuestPage.prototype.idAttribute;
-            page = QuestPage.dataFactory({[idAttribute]: id}, options);
+            let data = {};
+            if (id) {
+                let idAttribute = QuestPage.prototype.idAttribute;
+                data[idAttribute] = id;
+            }
+            page = QuestPage.dataFactory(data, options);
             this.add(page);
         }
 

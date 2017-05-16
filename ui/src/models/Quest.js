@@ -21,6 +21,23 @@ export class Quest extends AbstractModel {
         return this._options.pages;
     }
 
+    extractQuestPage(id) {
+        let pages = this.getPages();
+        return pages.get(id);
+    }
+
+    createQuestPage(options) {
+        let page = QuestPage.dataFactory(
+            {'quest_id': this.getId()},
+            {...this._options, ...options}
+        );
+
+        let pages = this.getPages();
+        pages.add(page);
+
+        return page;
+    }
+
     getFirstPage() {
         let firstPage = this.get('first_page');
 

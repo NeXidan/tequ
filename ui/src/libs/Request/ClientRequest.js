@@ -49,6 +49,14 @@ export class ClientRequest extends Request {
         });
     }
 
+    patch({data, ...options} = {}) {
+        return this.request({
+            method: 'patch',
+            body: JSON.stringify(data),
+            ...options
+        });
+    }
+
     delete(options = {}) {
         return this.request({
             method: 'delete',

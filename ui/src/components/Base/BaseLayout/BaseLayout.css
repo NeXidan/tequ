@@ -13,6 +13,11 @@
     min-width: 800px;
 }
 
+:global table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 .root {
     composes: font_normal from '../Base.css';
     padding-top: 52px;

@@ -6,6 +6,6 @@ const proxy = createProxyServer();
 export function apiController(req, res, next) {
     proxy.proxyRequest(req, res, {
         target: config.api.root + req.url,
-        ignorePath: true,
+        ignorePath: true
     });
 }

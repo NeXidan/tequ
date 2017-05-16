@@ -31,6 +31,6 @@ export class Action extends AbstractModel {
     }
 
     getFrom() {
-        return this.get('from');
+        return this.get('_from');
     }
 }
