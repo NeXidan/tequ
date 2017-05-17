@@ -33,4 +33,15 @@ export class Action extends AbstractModel {
     getFrom() {
         return this.get('_from');
     }
+
+    save(...args) {
+        let page = this.getFrom();
+        return page.save(...args);
+    }
+
+    remove(...args) {
+        let page = this.getFrom();
+        this.channel('remove').emit(this);
+        return page.save(...args)
+    }
 }

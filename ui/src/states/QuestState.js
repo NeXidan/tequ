@@ -30,7 +30,11 @@ export class QuestState extends Model {
     }
 
     extractAction(action) {
-        let id = action.split('-').unshift();
+        if (!action) {
+            return null;
+        }
+
+        let id = action.split('-').shift();
         if (id) {
             let quest = this.getQuest();
             let page = quest.extractQuestPage(id);

@@ -4,8 +4,8 @@
     {{/if}}
 </div>
 
-{{!-- <div class="sidebar-wrapper{{@questState.action ?: " hidden"}}">
+<div class="sidebar-wrapper{{@questState.action ?: " hidden"}}">
     {{#if @questState.action class="sidebar"}}
-        action
+        <ActionEdit questState=@questState/>
     {{/if}}
-</div> --}}
+</div>
