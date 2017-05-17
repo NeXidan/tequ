@@ -50,4 +50,15 @@ export class Quest extends AbstractModel {
 
         return firstPage;
     }
+
+    save(options) {
+        if (!this.getFirstPage()) {
+            return this.createQuestPage({depth: 0}).then((firstPage) => {
+                this.set('first_page', firstPage, {trigger: false});
+                return super.save(options);
+            });
+        }
+
+        return super.save(options);
+    }
 }

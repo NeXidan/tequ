@@ -22,7 +22,10 @@ export let diConfig = {
         // routes
 
         'route:home': ['!BaseLayout', {
-            content: 'HomeContent'
+            content: ['HomeContent', {
+                model: 'quest',
+                questState: 'questState'
+            }]
         }],
 
         'route:error': ['!BaseLayout', {

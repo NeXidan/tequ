@@ -45,6 +45,14 @@ export class QuestState extends Model {
         }
     }
 
+    createQuest() {
+        let quest = this.getQuest();
+        return quest.save().then((quest) => {
+            let {router} = this.getEnv();
+            router.navigate(router.reverse('route:quest', {id: quest.getId()}));
+        });
+    }
+
     exchange({page = null, action = null} = {}) {
         if (page !== this.getPage()) {
             this.setPage(page);

@@ -1,5 +1,8 @@
 .root {
     composes: root from "../../Base/Page.css";
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 .text {
@@ -8,4 +11,13 @@
 
 .result {
     padding: 20px 0;
+}
+
+.quest-form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.quest-form button {
+    margin-top: 10px;
 }
