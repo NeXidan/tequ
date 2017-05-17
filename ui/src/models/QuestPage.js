@@ -9,21 +9,35 @@ import {Actions} from '../collections/Actions';
     url: '/quest_pages'
 })
 export class QuestPage extends AbstractModel {
-    parse({actions = [], ...data} = {}) {
-        if (actions && !(actions instanceof Actions)) {
-            actions = new Actions(
-                actions.map(
+    parse(data = {}) {
+        if (data.actions && !(data.actions instanceof Actions)) {
+            let actions = new Actions(
+                data.actions.map(
                     (action) => new Action({_from: this, ...action}, this._options)
                 ),
                 this._options
             );
+
+            return {...data, actions};
         }
 
-        return {...data, actions};
+        return data;
     }
 
     getActions() {
-        return this.get('actions') || [];
+        let actions = this.get('actions');
+
+        if (!actions) {
+            actions = new Actions([], this._options);
+            this.set('actions', actions, {trigger: false});
+        }
+
+        return actions;
+    }
+
+    addAction(to) {
+        let actions = this.getActions();
+        return actions.add(new Action({_from: this, to}, this._options));
     }
 
     getSubPages() {
@@ -42,6 +56,16 @@ export class QuestPage extends AbstractModel {
             ...super.toJSON(),
             actions: actions.map((action) => action.serialize())
         };
+    }
+
+    remove(...args) {
+        if (this.getDepth() === 0) {
+            return Promise.reject("Cannot remove first page");
+        }
+
+        let actions = this.getActions();
+        return Promise.all(actions.map((action) => action.remove({save: false})))
+            .then(() => super.remove(...args));
     }
 
     serialize() {

@@ -27,15 +27,15 @@ export class Quest extends AbstractModel {
     }
 
     createQuestPage(options) {
-        let page = QuestPage.dataFactory(
+        let page = new QuestPage(
             {'quest_id': this.getId()},
             {...this._options, ...options}
         );
 
-        let pages = this.getPages();
-        pages.add(page);
-
-        return page;
+        return page.save({parse: true}).then(() => {
+            let pages = this.getPages();
+            return pages.add(page);
+        });
     }
 
     getFirstPage() {

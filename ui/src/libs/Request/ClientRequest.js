@@ -19,6 +19,10 @@ export class ClientRequest extends Request {
             }
         ).then((response) => {
             if (response.status >= 200 && response.status < 210) {
+                if (response.statusText === 'NO CONTENT') {
+                    return;
+                }
+
                 return response.json();
             }
 

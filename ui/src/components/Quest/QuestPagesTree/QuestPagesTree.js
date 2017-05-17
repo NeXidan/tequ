@@ -81,6 +81,9 @@ export class QuestPagesTree extends Component {
             let changeActionQuestState = this.questState.channel('change:action');
             this.listenTo(changeActionQuestState, this.onActiveNodeChange.bind(this));
 
+            this.listenTo(pages.channel('save'), this._initSimulation.bind(this));
+            this.listenTo(pages.channel('remove'), this._initSimulation.bind(this));
+
             this._simulation.on('tick', this.simulationTick.bind(this));
         }
 
@@ -155,25 +158,14 @@ export class QuestPagesTree extends Component {
             }
 
             if (!id || isQuestPageId(id)) {
-                let promises = []
-
                 let sourcePage = this.model.extractQuestPage(source.id);
-
-                if (!sourcePage.isFetched()) {
-                    promises.push(sourcePage.fetch());
-                }
-
                 let targetPage = this.model.extractQuestPage(id);
-                if (!targetPage) {
-                    targetPage = this.model.createQuestPage({
-                        depth: sourcePage.getDepth() + 1
-                    });
-                    promises.push(targetPage.save());
-                }
 
-                return Promise.all(promises).then(() => {
-                    let actions = sourcePage.getActions();
-                    actions.add({_from: sourcePage, to: targetPage});
+                return Promise.all([
+                    !sourcePage.isFetched() ? sourcePage.fetch() : sourcePage,
+                    !targetPage ? this.model.createQuestPage({depth: sourcePage.getDepth() + 1}) : targetPage
+                ]).then(([sourcePage, targetPage]) => {
+                    sourcePage.addAction(targetPage);
 
                     this.refreshSimulation([sourcePage, targetPage]);
                     this._simulation.restart();

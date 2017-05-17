@@ -39,9 +39,15 @@ export class Action extends AbstractModel {
         return page.save(...args);
     }
 
-    remove(...args) {
-        let page = this.getFrom();
+    remove({save = true, ...options} = {}) {
+        let from = this.getFrom();
+        let to = this.getTo();
+
         this.channel('remove').emit(this);
-        return page.save(...args)
+
+        return Promise.all([
+            save ? from.save(options) : Promise.resolve(),
+            to.remove(options)
+        ]);
     }
 }
