@@ -19,7 +19,7 @@ class CommandsMixin(SenderMixin):
         # TODO: pagination
         await self.sender.sendMessage(
             'Select quest:\n' + '\n'.join([
-                '/quests_{0}'.format(quest.id) for quest in Quest.read_all()
+                '/quests_{0} - {1}'.format(quest.id, quest.name) for quest in Quest.read_all()
             ])
         )
 
