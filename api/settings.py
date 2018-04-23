@@ -83,7 +83,7 @@ quest_pages = {
     'schema': {
         'text': {
             'type': 'string',
-            'maxlength': 1000
+            'maxlength': 4096
         },
         'image': {
             'type': 'string'
